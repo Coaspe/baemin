@@ -3,10 +3,12 @@ import "fullpage.js/vendors/scrolloverflow";
 import React, { useState } from "react";
 import Header from "./Header";
 import First from "./section/First";
-import Fourth from "./section/Fourth";
+import Sixth from "./section/Sixth";
 import Landing from "./section/Landing";
 import Second from "./section/Second";
 import Thrid from "./section/Third";
+import Fourth from "./section/Fourth";
+import Fifth from "./section/Fifth";
 
 const App = () => {
   const anchors = [
@@ -15,9 +17,10 @@ const App = () => {
     "secondPage",
     "thirdPage",
     "fourthPage",
+    "fifthPage",
+    "sixthPage",
   ];
   const [page, setPage] = useState("landing");
-  console.log(page);
   return (
     <div>
       <Header page={page} />
@@ -25,21 +28,28 @@ const App = () => {
         anchors={anchors}
         navigation
         navigationTooltips={anchors}
-        sectionsColor={["#282c34", "#2AC1BC", "#2AC1BC", "#2AC1BC", "#2AC1BC"]}
+        sectionsColor={[
+          "#282c34",
+          "#2AC1BC",
+          "#2AC1BC",
+          "#2AC1BC",
+          "#2AC1BC",
+          "#2AC1BC",
+          "#2AC1BC",
+        ]}
         onLeave={(origin, destination, direction) => {
-          console.log("onLeave event", { origin, destination, direction });
           setPage(destination.anchor);
         }}
         render={({ state, fullpageApi }) => {
-          console.log("render prop change", state, fullpageApi); // eslint-disable-line no-console
-
           return (
             <div>
               <Landing />
-              <First />
-              <Second />
-              <Thrid />
-              <Fourth />
+              <First page={page} />
+              <Second page={page} />
+              <Thrid page={page} />
+              <Fourth page={page} />
+              <Fifth page={page} />
+              <Sixth page={page} />
             </div>
           );
         }}

@@ -1,3 +1,17 @@
+import { motion } from "framer-motion";
+
+const mainImageVariant = {
+  hidden: {
+    scale: 2,
+  },
+  visible: {
+    scale: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+};
+
 const Landing = () => {
   return (
     <div className="section overflow-hidden">
@@ -5,13 +19,19 @@ const Landing = () => {
         <div className="absolute z-20 w-44" style={{ right: 0 }}>
           <img src="/images/rider-button-pc@2x.png" alt="rider button" />
         </div>
-        <div className="absolute z-10" style={{ bottom: -140 }}>
+        <motion.div
+          className="absolute z-10"
+          style={{ bottom: -140 }}
+          variants={mainImageVariant}
+          initial="hidden"
+          animate="visible"
+        >
           <img
             src="/images/main_05@2x.jpg"
             alt="main background"
             className="w-full h-full"
           />
-        </div>
+        </motion.div>
         <div></div>
         <div className="col-span-2 z-20 mt-40 relative">
           <div className="z-20 absolute w-64" style={{ right: 0, bottom: 0 }}>

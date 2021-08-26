@@ -1,4 +1,25 @@
-const Second = () => {
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const Second = ({ page, direction }) => {
+  const upVariants = {
+    initial: {
+      y: 0,
+    },
+    animate: {
+      y: -500,
+      transition: {
+        delay: 0.3,
+        duration: 1,
+      },
+    },
+  };
+  const [variants, setVariants] = useState(null);
+  useEffect(() => {
+    if (page === "secondPage") {
+      setVariants(upVariants);
+    }
+  }, [page]);
   return (
     <div className="section overflow-hidden">
       <div className="w-full h-full grid grid-cols-4">
@@ -16,14 +37,15 @@ const Second = () => {
               </div>
             </div>
           </div>
-          <div>
-            <img
-              src="/images/img-people@2x.png"
-              alt="second people"
-              className="absolute w-5/12"
-              style={{ bottom: 0, right: 0 }}
-            />
-          </div>
+          <motion.img
+            src="/images/img-people@2x.png"
+            alt="second people"
+            className="absolute w-5/12"
+            style={{ bottom: -500, right: 0 }}
+            variants={variants}
+            initial="initial"
+            animate="animate"
+          />
         </div>
         <img
           src="/images/scroll@2x.png"

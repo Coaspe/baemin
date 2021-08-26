@@ -1,4 +1,27 @@
-const First = () => {
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const First = ({ page }) => {
+  const upVariants = {
+    initial: {
+      x: 0,
+      y: 0,
+    },
+    animate: {
+      x: 150,
+      y: 150,
+      transition: {
+        delay: 0.3,
+        duration: 1,
+      },
+    },
+  };
+  const [variants, setVariants] = useState(null);
+  useEffect(() => {
+    if (page === "firstPage") {
+      setVariants(upVariants);
+    }
+  }, [page]);
   return (
     <div className="section overflow-hidden">
       <div className="w-full h-full grid grid-cols-4">
@@ -20,12 +43,18 @@ const First = () => {
             <div className="z-20 relative h-full">
               <div className="w-2/3 relative">
                 <img src="/images/img-road@2x.png" alt="load" />
-                <img
-                  src="/images/img-bike@2x.png"
-                  alt="bike"
-                  className="absolute w-52"
-                  style={{ bottom: 0, left: 90 }}
-                />
+                <AnimatePresence>
+                  <motion.img
+                    src="/images/img-bike@2x.png"
+                    alt="bike"
+                    className="absolute w-52"
+                    style={{ bottom: 0, left: 90 }}
+                    variants={variants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  />
+                </AnimatePresence>
               </div>
             </div>
           </div>
